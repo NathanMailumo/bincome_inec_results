@@ -9,6 +9,9 @@
             <a href="{{ route('pollingresult') }}" class="block p-5 text-gray-800 font-medium hover:bg-gray-50 transition">
                 Polling Unit Results
             </a>
+            <a href="{{ route('lgaresult') }}" class="block p-5 text-gray-800 font-medium hover:bg-gray-50 transition">
+                LGA Results
+            </a>
         </div>
     </div>
 </x-layout>
