@@ -1,0 +1,33 @@
+FROM php:8.2-fpm
+
+# Install system dependencies & PHP extensions required for Laravel & MySQL
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    nginx
+
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+
+# Copy your project code into the container
+COPY . .
+
+# Install PHP dependencies without dev packages
+RUN composer install --no-dev --optimize-autoloader
+
+# Set proper permissions for Laravel storage and cache
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+
+EXPOSE 8080
+
+# Start Laravel's built-in server binding to Render's required port
+CMD php artisan serve --host=0.0.0.0 --port=8080
