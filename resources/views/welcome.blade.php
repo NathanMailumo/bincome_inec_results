@@ -12,6 +12,9 @@
             <a href="{{ route('lgaresult') }}" class="block p-5 text-gray-800 font-medium hover:bg-gray-50 transition">
                 LGA Results
             </a>
+            <a href="{{ route('pu.create') }}" class="block p-5 text-gray-800 font-medium hover:bg-gray-50 transition">
+                Create Polling Unit
+            </a>
         </div>
     </div>
 </x-layout>
